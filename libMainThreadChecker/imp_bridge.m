@@ -42,8 +42,8 @@ typedef struct {
 
     WZQBridgeBlock bridgeData[numberOfBridgePerPage];
 
-    int32_t trampolineInstructions[WZQForwardingBridgeInstructionCount];
-    WZQForwardingBridgeEntryPointBlock trampolineEntryPoints[numberOfBridgePerPage];
+    int32_t bridgeInstructions[WZQForwardingBridgeInstructionCount];
+    WZQForwardingBridgeEntryPointBlock bridgeEntryPoints[numberOfBridgePerPage];
 } WZQBridgePage;
 
 
@@ -104,7 +104,7 @@ IMP imp_selector_bridge(SEL forwardingSelector)
     dataPageLayout->bridgeData[nextAvailableIndex].selector = forwardingSelector;
     dataPageLayout->nextAvailableIndex++;
 
-    IMP implementation = (IMP)&dataPageLayout->trampolineEntryPoints[nextAvailableIndex];
+    IMP implementation = (IMP)&dataPageLayout->bridgeEntryPoints[nextAvailableIndex];
 
     return implementation;
 }
